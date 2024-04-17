@@ -36,42 +36,49 @@ import {
 const links: {
 	title: string;
 	label?: string | undefined;
+	href: string;
 	icon: LucideIcon;
 	variant: "default" | "ghost";
 }[] = [
 	{
 		title: "Activity",
 		label: "128",
+		href: "/",
 		icon: Inbox,
 		variant: "default",
 	},
 	{
 		title: "Community",
 		label: "9",
+		href: "/community",
 		icon: Users,
 		variant: "ghost",
 	},
 	{
 		title: "Chat",
 		label: "",
+		href: "/chat",
 		icon: MessageCircle,
 		variant: "ghost",
 	},
 	{
 		title: "Calendar",
 		label: "23",
+		href: "/calendar",
 		icon: Calendar,
 		variant: "ghost",
 	},
 	{
 		title: "Meetings",
 		label: "",
+		href: "/meetings",
 		icon: MessageSquareText,
 		variant: "ghost",
 	},
 	{
 		title: "Archive",
 		label: "",
+		href: "/archive",
 		icon: Archive,
 		variant: "ghost",
 	},

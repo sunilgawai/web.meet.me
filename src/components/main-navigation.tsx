@@ -8,22 +8,26 @@ import { buttonVariants } from "@/components/ui/button";
 import {
 	Tooltip,
 	TooltipContent,
+	TooltipProvider,
 	TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { AccountSwitcher, accounts } from "./account-switcher";
 import { Separator } from "./ui/separator";
+// import { usePathname } from "next/navigation";
 
 interface NavProps {
 	isCollapsed: boolean;
 	links: {
 		title: string;
 		label?: string;
+		href: string;
 		icon: LucideIcon;
 		variant: "default" | "ghost";
 	}[];
 }
 
 const MainNavigation = ({ links, isCollapsed }: NavProps) => {
+    // const path = usePathname();
 	return (
 		<>
 			<div
@@ -43,37 +47,39 @@ const MainNavigation = ({ links, isCollapsed }: NavProps) => {
 				<nav className="grid gap-1 px-2 group-[[data-collapsed=true]]:justify-center group-[[data-collapsed=true]]:px-2">
 					{links.map((link, index) =>
 						isCollapsed ? (
-							<Tooltip key={index} delayDuration={0}>
-								<TooltipTrigger asChild>
-									<Link
-										href="#"
-										className={cn(
-											buttonVariants({ variant: link.variant, size: "icon" }),
-											"h-9 w-9",
-											link.variant === "default" &&
-												"dark:bg-muted dark:text-muted-foreground dark:hover:bg-muted dark:hover:text-white"
-										)}
+							<TooltipProvider>
+								<Tooltip key={index} delayDuration={0}>
+									<TooltipTrigger asChild>
+										<Link
+											href={link.href}
+											className={cn(
+												buttonVariants({ variant: link.variant, size: "icon" }),
+												"h-11 w-11",
+												link.variant === "default" &&
+													"dark:bg-muted dark:text-muted-foreground dark:hover:bg-muted dark:hover:text-white"
+											)}
+										>
+											<link.icon className="h-4 w-4" />
+											<span className="sr-only">{link.title}</span>
+										</Link>
+									</TooltipTrigger>
+									<TooltipContent
+										side="right"
+										className="flex items-center gap-4 text-white"
 									>
-										<link.icon className="h-4 w-4" />
-										<span className="sr-only">{link.title}</span>
-									</Link>
-								</TooltipTrigger>
-								<TooltipContent
-									side="right"
-									className="flex items-center gap-4"
-								>
-									{link.title}
-									{link.label && (
-										<span className="ml-auto text-muted-foreground">
-											{link.label}
-										</span>
-									)}
-								</TooltipContent>
-							</Tooltip>
+										{link.title}
+										{link.label && (
+											<span className="ml-auto text-muted-foreground">
+												{link.label}
+											</span>
+										)}
+									</TooltipContent>
+								</Tooltip>
+							</TooltipProvider>
 						) : (
 							<Link
 								key={index}
-								href="#"
+								href={link.href}
 								className={cn(
 									buttonVariants({ variant: link.variant, size: "lg" }),
 									link.variant === "default" &&
