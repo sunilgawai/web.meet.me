@@ -75,7 +75,7 @@ const MainNavigation = ({ links, isCollapsed }: NavProps) => {
 								key={index}
 								href="#"
 								className={cn(
-									buttonVariants({ variant: link.variant, size: "sm" }),
+									buttonVariants({ variant: link.variant, size: "lg" }),
 									link.variant === "default" &&
 										"dark:bg-muted dark:text-white dark:hover:bg-muted dark:hover:text-white",
 									"justify-start"

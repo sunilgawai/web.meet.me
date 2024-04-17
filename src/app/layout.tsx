@@ -4,8 +4,12 @@ import "./globals.css";
 import { Inter as FontSans } from "next/font/google";
 import { cn } from "@/lib/utils";
 import MainHeader from "@/components/main-header";
-
 import MainNavigation from "@/components/main-navigation";
+import {
+	ResizableHandle,
+	ResizablePanel,
+	ResizablePanelGroup,
+} from "@/components/ui/resizable";
 
 const fontSans = FontSans({
 	subsets: ["latin"],
@@ -19,11 +23,15 @@ export const metadata: Metadata = {
 import {
 	Archive,
 	ArchiveX,
+	Calendar,
 	File,
 	Inbox,
 	LucideIcon,
+	MessageCircle,
+	MessageSquareText,
 	Send,
 	Trash2,
+	Users,
 } from "lucide-react";
 const links: {
 	title: string;
@@ -32,33 +40,33 @@ const links: {
 	variant: "default" | "ghost";
 }[] = [
 	{
-		title: "Inbox",
+		title: "Activity",
 		label: "128",
 		icon: Inbox,
 		variant: "default",
 	},
 	{
-		title: "Drafts",
+		title: "Community",
 		label: "9",
-		icon: File,
+		icon: Users,
 		variant: "ghost",
 	},
 	{
-		title: "Sent",
+		title: "Chat",
 		label: "",
-		icon: Send,
+		icon: MessageCircle,
 		variant: "ghost",
 	},
 	{
-		title: "Junk",
+		title: "Calendar",
 		label: "23",
-		icon: ArchiveX,
+		icon: Calendar,
 		variant: "ghost",
 	},
 	{
-		title: "Trash",
+		title: "Meetings",
 		label: "",
-		icon: Trash2,
+		icon: MessageSquareText,
 		variant: "ghost",
 	},
 	{
@@ -82,15 +90,37 @@ export default function RootLayout({
 					fontSans.variable
 				)}
 			>
-				<div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
-					<div className="hidden border-r bg-muted/40 md:block">
-						<MainNavigation isCollapsed={false} links={links} />
+				<ResizablePanelGroup
+					direction="horizontal"
+					className="min-h-[200px] max-w-full rounded-lg border items-stretch"
+				>
+					<div className="grid min-h-screen w-full  md:grid-cols-[220px_0px_1fr] lg:grid-cols-[280px_0px_1fr]">
+						<ResizablePanel
+							defaultSize={25}
+							collapsedSize={4}
+							collapsible={true}
+							// minSize={15}
+							// maxSize={20}
+							// onCollapse={(collapsed) => {
+							// 	setIsCollapsed(collapsed);
+							// 	document.cookie = `react-resizable-panels:collapsed=${JSON.stringify(
+							// 		collapsed
+							// 	)}`;
+							// }}
+						>
+							<div className="hidden h-full border-r bg-muted/40 md:block">
+								<MainNavigation isCollapsed={false} links={links} />
+							</div>
+						</ResizablePanel>
+						<ResizableHandle withHandle />
+						<ResizablePanel defaultSize={75}>
+							<div className="h-full flex flex-col">
+								<MainHeader />
+								{children}
+							</div>
+						</ResizablePanel>
 					</div>
-					<div className="flex flex-col">
-						<MainHeader />
-						{children}
-					</div>
-				</div>
+				</ResizablePanelGroup>
 			</body>
 		</html>
 	);

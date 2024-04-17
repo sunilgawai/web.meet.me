@@ -1,11 +1,14 @@
 import {
 	CircleUser,
+	HelpCircle,
 	Home,
 	LineChart,
+	LogOut,
 	Menu,
 	Package,
 	Package2,
 	Search,
+	Settings,
 	ShoppingCart,
 	Users,
 } from "lucide-react";
@@ -125,12 +128,23 @@ const MainHeader = () => (
 				</Button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent align="end">
-				<DropdownMenuLabel>My Account</DropdownMenuLabel>
+				<DropdownMenuLabel>
+					My Account
+				</DropdownMenuLabel>
 				<DropdownMenuSeparator />
-				<DropdownMenuItem>Settings</DropdownMenuItem>
-				<DropdownMenuItem>Support</DropdownMenuItem>
+				<DropdownMenuItem>
+					<Settings className="h-4 w-4 mr-2" />
+					Settings
+				</DropdownMenuItem>
+				<DropdownMenuItem>
+					<HelpCircle className="h-4 w-4 mr-2" />
+					Support
+				</DropdownMenuItem>
 				<DropdownMenuSeparator />
-				<DropdownMenuItem>Logout</DropdownMenuItem>
+				<DropdownMenuItem>
+					<LogOut className="h-4 w-4 mr-2" />
+					Logout
+				</DropdownMenuItem>
 			</DropdownMenuContent>
 		</DropdownMenu>
 	</header>
