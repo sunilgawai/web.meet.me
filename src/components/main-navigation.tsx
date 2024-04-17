@@ -1,4 +1,4 @@
-"use client";
+"use server";
 
 import Link from "next/link";
 import { LucideIcon } from "lucide-react";
