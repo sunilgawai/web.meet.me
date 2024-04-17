@@ -11,7 +11,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
-export function LoginForm() {
+const LoginForm = () => {
 	return (
 		<Card className="mx-auto max-w-sm">
 			<CardHeader>
@@ -48,6 +48,9 @@ export function LoginForm() {
 					<Button type="submit" className="w-full">
 						Create an account
 					</Button>
+                    <Button variant="outline" className="w-full">
+						Sign up with Google
+					</Button>
 					<Button variant="outline" className="w-full">
 						Sign up with GitHub
 					</Button>
@@ -61,4 +64,6 @@ export function LoginForm() {
 			</CardContent>
 		</Card>
 	);
-}
+};
+
+export default LoginForm;
